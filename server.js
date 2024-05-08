@@ -11,6 +11,7 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
+const inventoryRoute = require("./routes/inventoryRoute")
 
 /* **************************
  * View Engine and Templates
@@ -30,6 +31,8 @@ app.get("/", baseController.buildHome)
 // app.get("/", function(req, res) {
 //   res.render("index", {title: "Home"})
 // })
+// Inventory routes
+app.use("/inv", inventoryRoute)
 
 /* ***********************
  * Local Server Information
