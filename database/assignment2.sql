@@ -14,5 +14,5 @@ SELECT inv_make, inv_model, classification_name FROM inventory
 	WHERE classification.classification_name = 'Sport';
 
 UPDATE inventory 
-	SET inv_image = REPLACE(inv_image, '/images', '/images/vehicules'),
-	inv_thumbnail = REPLACE(inv_thumbnail,'/images', '/images/vehicules' );
+	SET inv_image = REPLACE(inv_image, '/images', '/images/vehicles'),
+	inv_thumbnail = REPLACE(inv_thumbnail,'/images', '/images/vehicles' );
