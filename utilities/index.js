@@ -61,4 +61,39 @@ Util.buildClassificationGrid = async function(data){
     return grid
   }
 
+  Util.BuildPageView = async function(data) {
+    let pageView; 
+    
+    pageView = "<div id=pageView>";
+    
+    data.forEach(vehicle => {
+        
+        pageView += "<div id=PagePicture>";
+        pageView += '<img src="' + vehicle.inv_thumbnail +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model +' on CSE Motors"/>';
+        pageView += "</div>"; 
+        pageView += "<div id=PagePictureDetail>";
+        pageView += "<h3>" + vehicle.inv_make + ' '+ vehicle.inv_model + " Details </h3>";
+        pageView += "<p><strong>Mileage:</strong> " + ' ' + vehicle.inv_miles + "</p>";
+        pageView += "<p><strong>Price:</strong> " + ' ' + vehicle.inv_price + "</p>";
+        pageView += "<p><strong>Color:</strong> " + ' ' + vehicle.inv_color + "</p>";
+        pageView += "<p><strong>Description:</strong> " + ' ' + vehicle.inv_description + "</p>";
+        
+        
+        pageView += "</div>";
+    });
+    
+    // Close the single view container
+    pageView += "</div>";
+    
+    // Return the built single view HTML
+    return pageView;
+}
+
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
 module.exports = Util
