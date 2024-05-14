@@ -116,6 +116,90 @@ header a {
   width: 300px;
   height: 150px;
 }
+
+/**** LOGIN ****/
+#login-container {
+  border: 4px solid black;
+  outline: 3px solid red; 
+  border-radius: 5px;
+  width: 300px;
+  padding: 30px 20px 20px 50px;
+  margin: 30px auto;
+  background-color: #2b374f;  
+}
+
+
+input #email{
+  text-align: left;
+  color: white;
+  font-size: 1.4rem;
+}
+label{
+    display: block; 
+    margin-bottom:5px; 
+    color: white;
+    font-size: 1.7rem;
+}
+#email{
+  margin-bottom: 10px;}
+
+#login {
+  padding: 5px 30px;
+  border-radius: 20px;
+  margin: 10px auto;
+  display: block;
+  color: gray;
+}
+
+#email, #pword {
+  width: calc(100% - 24px); /* Width of input minus padding and border */
+  padding: 10px; /* Add padding to inputs */
+  box-sizing: border-box; /* Include padding and border in input width */
+  border-radius: 10px 10px;
+}
+
+#login-container p {
+  text-align: center;
+  font-size: 1.7rem;
+  color: white;  
+}
+#login-container p a {
+  color: white;
+}
+
+/**** Registration Page *****/
+#register-container {
+  border: 4px solid black;
+  border-radius: 5px;
+  width: 300px;
+  padding: 30px 20px 20px 30px;
+  margin: 30px auto;
+}
+
+.registration{
+    margin-bottom:5px; 
+    font-size: 1.2rem;
+    color: black;
+}
+ #register-container input[type="text"]{
+  margin-bottom: 10px;}
+
+#register {
+  padding: 10px 30px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  color: white;
+  margin-top: 15px;
+  background-color: blue;
+}
+
+#remail,#rpword, #fname, #lname{
+  width: calc(100% - 14px); 
+  padding: 10px; /* Add padding to inputs */
+  box-sizing: border-box; /* Include padding and border in input width */
+  border: 2px solid black;
+}
+
  
 @media only screen and (min-width: 728px){
   
@@ -199,6 +283,11 @@ header a {
 #PagePicture{
   width: 500px;
   height: 250px;
+}
+
+#login-container, #register-container {
+  width: 400px;
+   
 }
 }
 

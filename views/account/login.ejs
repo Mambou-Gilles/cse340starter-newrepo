@@ -1,0 +1,20 @@
+<h1><%= title %></h1>
+    <% if (typeof flash !== 'undefined' && flash.length > 0) { %>
+        <div class="flash">
+            <%= flash %>
+        </div>
+    <% } %>
+<div id="login-container">
+  
+    <form action="/login" method="POST">
+        <fieldset>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="account_email" required placeholder="Enter a valid email address">
+            <label for="pword">Password:</label>
+            <input type="password" id="pword" name="account_password" required
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+            <button type="submit" id="login">LOGIN</button>
+        </fieldset>
+    </form>
+    <p> No account? <a href="/account/register">Sign-up</a></p>
+</div>
