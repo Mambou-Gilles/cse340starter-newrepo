@@ -200,6 +200,20 @@ label{
   border: 2px solid black;
 }
 
+form #newClassificationForm label {
+  color: black;
+}
+
+#management-links{
+  display: block;
+  padding-left: 20px;
+  padding-bottom: 10px; 
+}
+#management-links a {
+  font-size: 1.3rem;
+}
+
+
  
 @media only screen and (min-width: 728px){
   

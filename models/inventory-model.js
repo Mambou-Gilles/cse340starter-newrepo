@@ -36,8 +36,67 @@ async function getInventory(vehicle_id) {
     console.error("getInventory error " + error);
   }
 }
+
+async function addClassification(newClassification){
+  try{
+    const sql = "INSERT INTO public.classification (classification_name) VALUES ($1) RETURNING *";
+    return await pool.query(sql, [newClassification])
+  }catch (error){
+    console.error("addClassification error" + error);
+  }
+}
+
+async function addVehicleInventory( 
+  classification_id, 
+  inv_make, 
+  inv_model, 
+  inv_description, 
+  inv_image, 
+  inv_thumbnail, 
+  inv_price, 
+  inv_year, 
+  inv_miles, 
+  inv_color){
+    try{
+      const sql = `INSERT INTO public.inventory 
+                    (classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color) 
+                      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`;
+      return await pool.query(sql, [classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color])
+    }catch (error){
+      console.error("addVehicle error" + error);
+    }
+  }
+
+
+  /* ***************************
+ *  Checking for Existing Classifications
+  ******************************/
+async function checkExistingClassifications(classification_name){
+  try {
+    const sql = "SELECT * FROM account WHERE account_password = $1"
+    return classTable = await pool.query(sql, [classification_name])
+    return classTable.rowCount
+    } catch (error) {
+      return error.message
+    }
+}
   
+async function addVehicleInventory( classification_id, inv_make, 
+  inv_model, 
+  inv_description, 
+  inv_image, 
+  inv_thumbnail, 
+  inv_price, 
+  inv_year, 
+  inv_miles, 
+  inv_color){
+    try{
+      const sql = "INSERT INTO public.inventory (classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *";
+      return await pool.query(sql, [classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color])
+    }catch (error){
+      console.error("addVehicle error" + error);
+    }
+  }
 
-
-module.exports = {getClassifications, getInventoryByClassificationId, getInventory};
+module.exports = {getClassifications, getInventoryByClassificationId, getInventory, addClassification, addVehicleInventory};
 

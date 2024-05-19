@@ -35,6 +35,92 @@ invCont.BuildVehiclePageViewId = async function(req, res, next) {
   });
 };
 
+invCont.buildManagement = async function(req, res, next) {
+  let nav = await utilities.getNav();
+  const links = await utilities.getManagementLinks();
+  res.render ("./inventory/management", {
+    title: "Vehicle Management",
+    nav,
+    links
+  })
+}
+
+invCont.buildAddClassification = async function(req, res, next){
+  let nav = await utilities.getNav();
+  const form = await utilities.buildNewClassification();
+  res.render("./inventory/add-classification", {
+    title: "Add New Classification",
+    nav,
+    form,
+    errors: null,
+  })
+
+}
+
+invCont.addClassification = async function(req, res, next){
+  let nav = await utilities.getNav();
+  const {classificationName} = req.body;
+  const newClassification = await invModel.addClassification(classificationName);
+
+  if(newClassification){
+      req.flash(
+          "notice", 
+          `${classificationName} has been addedd as to classification.`
+      )
+      res.redirect("./")
+  } else {
+    req.flash("notice", "Classification not added, try again")
+    res.status(501).render("inventory/add-classification", {
+        title: "Add New Vehicle",
+        nav
+    })
+  }
+}
+
+
+invCont.buildAddInventory = async function(req, res, next){
+  let nav = await utilities.getNav();
+  const list = await utilities.buildClassificationList();
+  res.render("./inventory/add-inventory", {
+      title : "Add New Vehicle",
+      nav, 
+      list,
+      errors: null,
+  })
+}
+
+invCont.addVehicleInventory = async function(req, res, next){
+  let nav = await utilities.getNav();
+  const {classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color} = req.body;
+  const newVehicle = await invModel.addVehicleInventory(
+      classification_id,
+      inv_make, 
+      inv_model, 
+      inv_description, 
+      inv_image, 
+      inv_thumbnail, 
+      inv_price, 
+      inv_year, 
+      inv_miles, 
+      inv_color,
+  );
+  
+  if (newVehicle) {
+      req.flash(
+          "notice",
+          `${inv_make} ${inv_model} has been added.`
+      )
+      res.redirect("./")
+
+  } else {
+      req.flash("notice", "Classification not added, try again")
+      res.status(501).render("inventory/add-inventory", {
+          title: "Add New Inventory",
+          nav,
+      })
+  }
+}
+
 invCont.errorHandling = (req, res, next) => {
   const error = new Error("This is an error");
   next(error);
