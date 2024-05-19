@@ -24,7 +24,7 @@ header a {
 
  /*  NAVIGATION */
  nav {
-  background-color:rgb(118, 116, 116);
+  background-color:#3e3c3c;
   padding: 5px;
  }
  nav ul {
@@ -39,6 +39,10 @@ header a {
   color: white;
   font-family: var(--secondary-font);
   font-size: 30px;
+ }
+
+ nav ul li a {
+  color: #fbff00;
  }
 
 /**BODY*/
