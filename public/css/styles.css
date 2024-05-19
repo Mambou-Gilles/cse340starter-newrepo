@@ -205,14 +205,88 @@ form #newClassificationForm label {
 }
 
 #management-links{
-  display: block;
-  padding-left: 20px;
-  padding-bottom: 10px; 
+    display: block;
+    padding-left: 30px;
+    padding-bottom: 10px;
 }
 #management-links a {
   font-size: 1.3rem;
 }
 
+#newClassifactorForm{
+    display: inline-block; 
+    border: 1px solid gray;
+    padding: 10px;
+    background-color: #5a8bb3;
+    margin: 0 30%;
+    width: 30%;
+}
+#newClassifactorForm label {
+  font-size:small;
+  color: black;
+  font-style: italic;
+}
+#newClassifactorForm input {
+  display: block; /* Places the input and button on separate lines */
+  width: 60%;
+  box-sizing: border-box; 
+  margin-top: 10px; 
+margin-bottom: 20px;
+}
+#newClassifactorForm button {
+padding: 5px;
+font-weight:bold;
+}
+
+#newClassificatorForm label{
+  display: flex;
+  flex-direction: column;
+}
+
+.new-vehicle-form label, select{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
+}
+.newClassificatorForm input{
+  height: 30px;
+  border-radius: 8px;
+  font-size: larger;
+}
+
+#newClassificatorForm button,  .new-vehicle-form button{
+  width: 250px;
+  margin: auto;
+  height: 44px;
+  border-radius: 8px;
+}
+
+.new-vehicle-form{
+  display: inline-block; 
+  border: 1px solid gray;
+  padding: 10px;
+  background-color: #5a8bb3;
+  margin: 0 40%;
+  width: 40%;
+  height: fit-content;
+}
+.new-vehicle-form select {
+  margin-left: 0;
+}
+.new-vehicle-form button {
+  margin-top: 20px;
+  width: 60%;}
+
+  .new-vehicle-form textarea {
+    padding: 30px;
+    width: 70%;
+  }
+
+  .new-vehicle-form label {
+    margin-left: 0;
+    padding-top: 5px;
+  }
 
  
 @media only screen and (min-width: 728px){
@@ -303,6 +377,20 @@ form #newClassificationForm label {
   width: 400px;
    
 }
+
+.new-vehicle-form{
+  display: inline-block; 
+  border: 1px solid gray;
+  padding: 10px;
+  background-color: #5a8bb3;
+}
+.new-vehicle-form button {
+  margin-top: 5px;
+  width: 60%;}
+  .new-vehicle-form select {
+  width: 40%;}
+  
+
 }
 
 

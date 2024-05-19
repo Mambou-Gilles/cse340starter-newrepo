@@ -97,7 +97,8 @@ Util.getManagementLinks = async function(req, res, next){
 }
 
 Util.buildNewClassification = async function(res, req, next){
-  return form = `<form action="/inv/add-classification" id="newClassificationForm" method="post">
+  return form = `<form action="/inv/add-classification" id="newClassifactorForm" method="post">
+                  <h3><i>FIELD IS REQUIRED</i></h3>
                   <fieldset>
                   <h3>Classification Name</h3>
                   <label for="classificationName">NAME MUST BE ALPHABETIC CHARACTERS ONLY</label>
@@ -152,7 +153,7 @@ Util.buildClassificationList = async function (classification_id = null) {
 
 
                               <label id="color">Color</label>
-                              <input type="text" id="color" name="inv_color"required>
+                              <input type="text" id="color" name="inv_color"required><br><br>
 
 
                               <button type="submit">Add Vehicle</button>
