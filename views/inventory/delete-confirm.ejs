@@ -1,0 +1,52 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect("/")
+
+    } %>
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+        <%  }) %>
+    </ul>
+<% } %>
+
+<form id="deleteForm" action="/inv/delete" method="post">
+    <%- classificationSelectList %>
+    <label for="make">Make</label>
+    <input type="text" id="make" name="inv_make" readonly
+    <% if (locals.inv_make){ %> value="<%= locals.inv_make %>" 
+        <% }%>>
+
+    <label for="model">Model</label>
+    <input type="text" id="model" name="inv_model" readonly
+    <% if (locals.inv_model){ %> value="<%= locals.inv_model %>" 
+        <% }%>>
+   
+    <label id="price">Price</label>
+    <input type="decimal" id="price" name="inv_price" readonly pattern="^[0-9]*.?[0-9]+$" placeholder="decimal or integer"
+    <% if (locals.inv_price){ %> value="<%= locals.inv_price %>" 
+        <% }%>>
+
+
+    <label id="year">Year</label>
+    <input type="number" id="year" name="inv_year" readonly placeholder="4-digit year" pattern="^\d{4}$" 
+    <% if (locals.inv_year){ %> value="<%= locals.inv_year %>" 
+        <% }%>>
+
+    <button type="submit" >Update Vehicle</button>
+
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
+
+    <p>Confirm Deletion - The delete is permanent</p>
+    </form>`
+
+
+
+
+<%# - list %>

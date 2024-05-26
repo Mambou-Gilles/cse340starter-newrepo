@@ -7,6 +7,7 @@ const router = new express.Router()
 const utilities = require("../utilities")
 const accountController = require("../controllers/accountController")
 const regValidate = require('../utilities/account-validation')
+const { render } = require("ejs");
 
 
 /**************************************
@@ -29,14 +30,31 @@ router.post(
 );
 
 // Process the login attempt
-router.post(
+// router.post(
+//     "/login",
+//     regValidate.loginRules(),
+//     regValidate.checkLogData,
+//     utilities.handleErrors(accountController.loginAccount)
+//    )
+// Process the login request
+  router.post(
     "/login",
     regValidate.loginRules(),
     regValidate.checkLogData,
-    utilities.handleErrors(accountController.loginAccount)
-    // (req, res) => {
-    //   res.status(200).send('login process')
-    // }
+    utilities.handleErrors(accountController.accountLogin)
   )
+
+// Account Management routes/accountRoute.js
+router.get('/',
+            utilities.checkLogin,
+            utilities.handleErrors(accountController.accountManagementView));
+
+router.get("/update", utilities.handleErrors(accountController.buildUpdateAccount))
+router.post("/update", utilities.handleErrors(accountController.updateAccount))
+router.get("/logout", accountController.logout)
+
+
+
+
 
 module.exports = router;

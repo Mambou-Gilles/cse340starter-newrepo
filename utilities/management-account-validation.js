@@ -27,10 +27,12 @@ validate.classificationRules = () => {
 *  Classification Data Check
 * ********************************* */
 validate.checkClassificationData = async (req, res, next) => {
+    const { classification_name } = req.body
     let errors = []
-    errors =validation(req)
+    errors =validationResult(req)
     if (!errors.isEmpty()){
-        let nav = await utilities.buildNewClassification();
+        let nav = await utilities.getNav()
+        const form = await utilities.buildNewClassification()
         res.render("/inventory/add-classification", {
             errors,
             title: "Add new Classifications",
@@ -129,5 +131,35 @@ validate.checkInventoryData = async (req, res, next) => {
         }
         next()
     }
+
+
+validate.checkUpdateData = async (req, res, next) => {
+    const {inv_id, classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color} = req.body;
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        const list = await utilities.buildClassificationList();
+        res.render("inventory/edit-inventory", {
+            title: "Edit",
+            nav,
+            errors,
+            list,
+            inv_id,
+            classification_id, 
+            inv_make, 
+            inv_model, 
+            inv_description, 
+            inv_image, 
+            inv_thumbnail, 
+            inv_price, 
+            inv_year, 
+            inv_miles, 
+            inv_color,
+        })
+        return
+    }
+        next()
+}
 
 module.exports = validate;

@@ -15,9 +15,10 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
-const utilities = require('./utilities');
+const utilities = require('./utilities/');
 const accountRoute = require("./routes/accountRoute")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 /* **************************
  * View Engine and Templates
  ****************************/
@@ -43,6 +44,17 @@ app.use(session({
 }))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
+
+app.use("/inv", (req,res,next) => {
+  if(res.locals.accountData && (res.locals.accountData.account_type === "Employee" || res.locals.account_type === "Admin")) {
+    next();
+  } else {
+    res.redirect("account/login")
+  }
+})
 
 
 //Express Messages Middleware

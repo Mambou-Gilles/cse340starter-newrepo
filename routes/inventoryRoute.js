@@ -28,4 +28,18 @@ router.post('/add-inventory',
             classificationValidator.checkInventoryData,
             invController.addVehicleInventory);
 
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView));
+
+router.get("/update/", 
+            classificationValidator.inventoryRules(), 
+            classificationValidator.checkUpdateData,
+            utilities.handleErrors(invController.updateInventory));
+
+router.get("/delete/:inv_id", 
+            // classificationValidator.inventoryRules(), 
+            // classificationValidator.checkUpdateData,
+            utilities.handleErrors(invController.deleteInventoryView));
+
 module.exports = router;

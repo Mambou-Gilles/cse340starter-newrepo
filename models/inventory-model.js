@@ -25,6 +25,8 @@ async function getInventoryByClassificationId(classification_id) {
     }
   }
 
+
+/**** GET INVENTORY BY ID FOR THE VEHICLES */
 async function getInventory(vehicle_id) {
   try{
     const data = await pool.query(
@@ -71,9 +73,9 @@ async function addVehicleInventory(
   /* ***************************
  *  Checking for Existing Classifications
   ******************************/
-async function checkExistingClassifications(classification_name){
+async function checkExistingClassification(classification_name){
   try {
-    const sql = "SELECT * FROM account WHERE account_password = $1"
+    const sql = "SELECT * FROM classification WHERE classification = $1"
     return classTable = await pool.query(sql, [classification_name])
     return classTable.rowCount
     } catch (error) {
@@ -81,22 +83,76 @@ async function checkExistingClassifications(classification_name){
     }
 }
   
-async function addVehicleInventory( classification_id, inv_make, 
-  inv_model, 
-  inv_description, 
-  inv_image, 
-  inv_thumbnail, 
-  inv_price, 
-  inv_year, 
-  inv_miles, 
-  inv_color){
-    try{
-      const sql = "INSERT INTO public.inventory (classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *";
-      return await pool.query(sql, [classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color])
-    }catch (error){
-      console.error("addVehicle error" + error);
-    }
-  }
+// async function addVehicleInventory( classification_id, inv_make, 
+//   inv_model, 
+//   inv_description, 
+//   inv_image, 
+//   inv_thumbnail, 
+//   inv_price, 
+//   inv_year, 
+//   inv_miles, 
+//   inv_color){
+//     try{
+//       const sql = "INSERT INTO public.inventory (classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *";
+//       return await pool.query(sql, [classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color])
+//     }catch (error){
+//       console.error("addVehicle error" + error);
+//     }
+//   }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventory, addClassification, addVehicleInventory};
+
+  /* ***************************
+ *  Update Inventory Data
+ * ************************** */
+async function updateInventory(
+  inv_id,
+  inv_make,
+  inv_model,
+  inv_description,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_year,
+  inv_miles,
+  inv_color,
+  classification_id
+) {
+  try {
+    const sql =
+      "UPDATE public.inventory SET inv_make = $1, inv_model = $2, inv_description = $3, inv_image = $4, inv_thumbnail = $5, inv_price = $6, inv_year = $7, inv_miles = $8, inv_color = $9, classification_id = $10 WHERE inv_id = $11 RETURNING *"
+    const data = await pool.query(sql, [
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id,
+      inv_id
+    ])
+    return data.rows[0]
+  } catch (error) {
+    console.error("model error: " + error)
+  }
+}
+
+/* ***************************
+ *  Delete Inventory Item
+ * ************************** */
+async function deleteInventoryItem(inv_id) {
+  try {
+    // Performing a database query to delete an inventory item
+    const sql = 'DELETE FROM inventory WHERE inv_id = $1';
+    const data = await pool.query(sql, [inv_id]);
+    return data;
+  } catch (error) {
+    // Error handling: creating a new error object
+    new Error("Delete Inventory Error");
+  }
+}
+
+module.exports = {getClassifications, getInventoryByClassificationId, getInventory, addClassification, checkExistingClassification, addVehicleInventory, updateInventory, deleteInventoryItem};
 

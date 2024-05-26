@@ -1,5 +1,7 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 // console.log(data)
 /* ************************
@@ -110,8 +112,7 @@ Util.buildNewClassification = async function(res, req, next){
 
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await invModel.getClassifications()
-  let classificationList = `<form class="new-vehicle-form" action="/inv/add-inventory" method="post">
-      <select name="classification_id" id="classificationList" required>`
+  let classificationList = `<select name="classification_id" id="classificationList" class="classification-update-list" required>`
       classificationList += "<option value=''>Choose a Classification</option>"
       data.rows.forEach((row) => {
       classificationList += '<option value="' + row.classification_id + '"'
@@ -124,40 +125,7 @@ Util.buildClassificationList = async function (classification_id = null) {
       classificationList += ">" + row.classification_name + "</option>"
       })
       classificationList += "</select>"
-      classificationList += `<label for="make">Make</label>
-                              <input type="text" id="make" name="inv_make" required>
-
-                              <label for="model">Model</label>
-                              <input type="text" id="model" name="inv_model"required>
-
-                              <label for="description">Description</label>
-                              <textarea type="text" id="description" name="inv_description"required></textarea>
-
-                              <label id="image">image Path</label>
-                              <input type="text" id="image" name="inv_image" value="/images/vehicles/no-image.png" required>
-
-                              <label id="thumbnail">thumbnail Path</label>
-                              <input type="text" id="thumbnail" name="inv_thumbnail" value="/images/vehicles/no-image.png" required>
-
-
-                              <label id="price">Price</label>
-                              <input type="decimal" id="price" name="inv_price" placeholder="decimal or integer"  required>
-
-
-                              <label id="year">Year</label>
-                              <input type="number" id="year" name="inv_year" placeholder="4-digit year" pattern="^\d{4}$" required>
-
-
-                              <label id="miles">Miles</label>
-                              <input type="number" id="miles" name="inv_miles" placeholder="digits only" pattern="^\d+$" required>
-
-
-                              <label id="color">Color</label>
-                              <input type="text" id="color" name="inv_color"required><br><br>
-
-
-                              <button type="submit">Add Vehicle</button>
-                              </form>`
+      
       return classificationList
   }
 
@@ -167,5 +135,53 @@ Util.buildClassificationList = async function (classification_id = null) {
  * General Error Handling
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+
+/* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkJWTToken = (req, res, next) => {
+  if (req.cookies.jwt) {
+   jwt.verify(
+    req.cookies.jwt,
+    process.env.ACCESS_TOKEN_SECRET,
+    function (err, accountData) {
+     if (err) {
+      req.flash("Please log in")
+      res.clearCookie("jwt")
+      return res.redirect("/account/login")
+     }
+     res.locals.accountData = accountData
+     res.locals.loggedin = 1
+     next()
+    })
+  } else {
+   next()
+  }
+ }
+
+ // Middleware to check account type
+// Util.checkAccountType = (req, res, next) => {
+//   if (res.locals.accountData && (res.locals.accountData.account_type === 'Employee' || res.locals.accountData.account_type === 'Admin')) {
+//     next();
+//   } else {
+//     req.flash("error", "Unauthorized access");
+//     res.redirect("/login");
+//   }
+// };
+
+
+ /* ****************************************
+ *  Check Login
+ * ************************************ */
+ Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
+
 
 module.exports = Util

@@ -1,402 +1,455 @@
 :root{
-  --primamy-font: "Roboto", sans-serif;
-  --secondary-font: "Josefin", sans-serif;
-
-}
-
-
-
-/* HEADER + LINKS */
-header {
-  display:flex;
-  justify-content: space-between;
-  padding: 15px;
-}
-
-header a {
-  text-decoration: none;
-  color: black;
-}.siteName {
-  font-size: 30px;
-  font-family: var(--secondary-font);
-}
-
-
- /*  NAVIGATION */
- nav {
-  background-color:#3e3c3c;
-  padding: 5px;
- }
- nav ul {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
- }
-
- nav ul li {
-  text-decoration: none;
-  list-style: none;
-  color: white;
-  font-family: var(--secondary-font);
-  font-size: 30px;
- }
-
- nav ul li a {
-  color: #fbff00;
- }
-
-/**BODY*/
-#first-part{
-  position:relative;
-}
-#firts-part img{
-  width: 100%;
-}
-#first-part div{
-  position:absolute;
-  top: 0;
-  left: 10px;
-  padding: 15px; 
-  background-color: rgba(252, 252, 252, 0.667);
-  color:rgb(1, 136, 91);
-  ;
-}
-#first-part div ul li{
-  font-size: 30px;
-}
-#first-part div a img{
-  width: 100px;
-}
-#first-part div h2{
-  margin: 0;
-  padding:0;
-}
-#first-part div ul{
-  list-style: none;
-  padding-left: 0;
-  margin-top: 0;
-}
-
-#rev{
-  width: 100%;
-}
-#rev{
-  display: flex;
-  flex-direction: column;
-  font-family: var(--secondary-font);
-  gap: 10px;
-  padding-left: 1.2em;
-}
-
-#del-upg{
-  display: grid;
-  grid-template-columns: auto auto;
-  /* width: 100%; */
-  gap: 10px;
-}
-#del-upg h2{
-  grid-column: 1/3;
-}
-#del-upg figure{
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin: 0; 
-  padding: 0;
-}
-#del-upg figure img{
-  padding: 10px 25%;
-  width: 50%;
-  height: 80%;
-  background-color: #0f5085;
-  margin: auto;
-}
-#del-upg figure figcaption{
-  width: 100%;
-  margin: 0;
-}
-
-#PagePicture{
-  width: 300px;
-  height: 150px;
-}
-
-/**** LOGIN ****/
-#login-container {
-  border: 4px solid black;
-  outline: 3px solid red; 
-  border-radius: 5px;
-  width: 300px;
-  padding: 30px 20px 20px 50px;
-  margin: 30px auto;
-  background-color: #2b374f;  
-}
-
-
-input #email{
-  text-align: left;
-  color: white;
-  font-size: 1.4rem;
-}
-label{
-    display: block; 
-    margin-bottom:5px; 
-    color: white;
-    font-size: 1.7rem;
-}
-#email{
-  margin-bottom: 10px;}
-
-#login {
-  padding: 5px 30px;
-  border-radius: 20px;
-  margin: 10px auto;
-  display: block;
-  color: gray;
-}
-
-#email, #pword {
-  width: calc(100% - 24px); /* Width of input minus padding and border */
-  padding: 10px; /* Add padding to inputs */
-  box-sizing: border-box; /* Include padding and border in input width */
-  border-radius: 10px 10px;
-}
-
-#login-container p {
-  text-align: center;
-  font-size: 1.7rem;
-  color: white;  
-}
-#login-container p a {
-  color: white;
-}
-
-/**** Registration Page *****/
-#register-container {
-  border: 4px solid black;
-  border-radius: 5px;
-  width: 300px;
-  padding: 30px 20px 20px 30px;
-  margin: 30px auto;
-}
-
-.registration{
-    margin-bottom:5px; 
-    font-size: 1.2rem;
-    color: black;
-}
- #register-container input[type="text"]{
-  margin-bottom: 10px;}
-
-#register {
-  padding: 10px 30px;
-  border-radius: 20px;
-  font-size: 1.2rem;
-  color: white;
-  margin-top: 15px;
-  background-color: blue;
-}
-
-#remail,#rpword, #fname, #lname{
-  width: calc(100% - 14px); 
-  padding: 10px; /* Add padding to inputs */
-  box-sizing: border-box; /* Include padding and border in input width */
-  border: 2px solid black;
-}
-
-form #newClassificationForm label {
-  color: black;
-}
-
-#management-links{
-    display: block;
-    padding-left: 30px;
-    padding-bottom: 10px;
-}
-#management-links a {
-  font-size: 1.3rem;
-}
-
-#newClassifactorForm{
-    display: inline-block; 
-    border: 1px solid gray;
-    padding: 10px;
-    background-color: #5a8bb3;
-    margin: 0 30%;
-    width: 30%;
-}
-#newClassifactorForm label {
-  font-size:small;
-  color: black;
-  font-style: italic;
-}
-#newClassifactorForm input {
-  display: block; /* Places the input and button on separate lines */
-  width: 60%;
-  box-sizing: border-box; 
-  margin-top: 10px; 
-margin-bottom: 20px;
-}
-#newClassifactorForm button {
-padding: 5px;
-font-weight:bold;
-}
-
-#newClassificatorForm label{
-  display: flex;
-  flex-direction: column;
-}
-
-.new-vehicle-form label, select{
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  margin: auto;
-}
-.newClassificatorForm input{
-  height: 30px;
-  border-radius: 8px;
-  font-size: larger;
-}
-
-#newClassificatorForm button,  .new-vehicle-form button{
-  width: 250px;
-  margin: auto;
-  height: 44px;
-  border-radius: 8px;
-}
-
-.new-vehicle-form{
-  display: inline-block; 
-  border: 1px solid gray;
-  padding: 10px;
-  background-color: #5a8bb3;
-  margin: 0 40%;
-  width: 40%;
-  height: fit-content;
-}
-.new-vehicle-form select {
-  margin-left: 0;
-}
-.new-vehicle-form button {
-  margin-top: 20px;
-  width: 60%;}
-
-  .new-vehicle-form textarea {
-    padding: 30px;
-    width: 70%;
-  }
-
-  .new-vehicle-form label {
-    margin-left: 0;
-    padding-top: 5px;
-  }
-
- 
-@media only screen and (min-width: 728px){
+	--primamy-font: "Roboto", sans-serif;
+	--secondary-font: "Josefin", sans-serif;
   
-
-  #wrapper {
-    border-radius: 10px;
-    /* margin-top: 2rem; */
-    padding: 1vw;
-    width: 75vw;
-    max-width: 1200px;
   }
   
-  body{
-    background-image: url(../images/site/small_check.jpg);
-    
-  }
-  #wrapper{
-    background-color: white;
-    width: 75%;
-    margin: auto;
-    /* padding: 10px; */
-    border: 2px solid blue;
-    border-radius: 4%;
-  }
-  main h1{
-    grid-column: 1/3;
-  }
-
-  #first-part img {
-    width: 100%;
-  }
-
-    
-  #first-part div {
-    position: absolute;
-    left: 150px;
-    top:100px;
-    font-size: 20px;
+  
+  
+  /* HEADER + LINKS */
+  header {
+	display:flex;
+	justify-content: space-between;
+	padding: 15px;
   }
   
+  header a {
+	text-decoration: none;
+	color: black;
+  }.siteName {
+	font-size: 30px;
+	font-family: var(--secondary-font);
+  }
+  
+  
+   /*  NAVIGATION */
+   nav {
+	background-color:#3e3c3c;
+	padding: 5px;
+   }
+   nav ul {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+   }
+  
+   nav ul li {
+	text-decoration: none;
+	list-style: none;
+	color: white;
+	font-family: var(--secondary-font);
+	font-size: 30px;
+   }
+  
+   nav ul li a {
+	color: #fbff00;
+   }
+  
+  /**BODY*/
+  #first-part{
+	position:relative;
+  }
+  #firts-part img{
+	width: 100%;
+  }
+  #first-part div{
+	position:absolute;
+	top: 0;
+	left: 10px;
+	padding: 15px; 
+	background-color: rgba(252, 252, 252, 0.667);
+	color:rgb(1, 136, 91);
+	;
+  }
+  #first-part div ul li{
+	font-size: 30px;
+  }
   #first-part div a img{
-    width: fit-content;
+	width: 100px;
   }
-
-  #second-part {
-    display: grid;
-    grid-template-columns: 1fr 1fr; 
-    gap: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+  #first-part div h2{
+	margin: 0;
+	padding:0;
   }
-  
-  #del-upg {
-    grid-column-start: 1;
-    grid-row-start: 1;
-    grid-row-end:2;
+  #first-part div ul{
+	list-style: none;
+	padding-left: 0;
+	margin-top: 0;
   }
   
-  /* Positions the Reviews section in the second column */
-  #rev {
-    grid-column-start: 2;
+  #rev{
+	width: 100%;
+  }
+  #rev{
+	display: flex;
+	flex-direction: column;
+	font-family: var(--secondary-font);
+	gap: 10px;
+	padding-left: 1.2em;
   }
   
-  #rev ul li {
-    margin-bottom: 20px; /* Adjust the margin as needed */
+  #del-upg{
+	display: grid;
+	grid-template-columns: auto auto;
+	/* width: 100%; */
+	gap: 10px;
   }
-
-  #pageView{
-    display: flex;
-    /* grid-template-columns: 1fr 1fr; */
+  #del-upg h2{
+	grid-column: 1/3;
   }
-#PagePictureDetail h3{
-  text-decoration: underline ;
-  margin-top: 0; 
-  font-size: 2rem;
-}
-#PagePictureDetail h3::after{
-  content: " ✔️";
-  font-size: 3rem;
-}
-#PagePicture{
-  width: 500px;
-  height: 250px;
-}
-
-#login-container, #register-container {
-  width: 400px;
-   
-}
-
-.new-vehicle-form{
-  display: inline-block; 
-  border: 1px solid gray;
-  padding: 10px;
-  background-color: #5a8bb3;
-}
-.new-vehicle-form button {
-  margin-top: 5px;
-  width: 60%;}
+  #del-upg figure{
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	margin: 0; 
+	padding: 0;
+  }
+  #del-upg figure img{
+	padding: 10px 25%;
+	width: 50%;
+	height: 80%;
+	background-color: #0f5085;
+	margin: auto;
+  }
+  #del-upg figure figcaption{
+	width: 100%;
+	margin: 0;
+  }
+  
+  #PagePicture{
+	width: 300px;
+	height: 150px;
+  }
+  
+  /**** LOGIN ****/
+  #login-container {
+	border: 4px solid black;
+	outline: 3px solid red; 
+	border-radius: 5px;
+	width: 300px;
+	padding: 30px 20px 20px 50px;
+	margin: 30px auto;
+	background-color: #2b374f;  
+  }
+  
+  
+  input #email{
+	text-align: left;
+	color: white;
+	font-size: 1.4rem;
+  }
+  label{
+	  display: block; 
+	  margin-bottom:5px; 
+	  color: white;
+	  font-size: 1.7rem;
+  }
+  #email{
+	margin-bottom: 10px;}
+  
+  #login {
+	padding: 5px 30px;
+	border-radius: 20px;
+	margin: 10px auto;
+	display: block;
+	color: gray;
+  }
+  
+  #email, #pword {
+	width: calc(100% - 24px); /* Width of input minus padding and border */
+	padding: 10px; /* Add padding to inputs */
+	box-sizing: border-box; /* Include padding and border in input width */
+	border-radius: 10px 10px;
+  }
+  
+  #login-container p {
+	text-align: center;
+	font-size: 1.7rem;
+	color: white;  
+  }
+  #login-container p a {
+	color: white;
+  }
+  
+  /**** Registration Page *****/
+  #register-container {
+	border: 4px solid black;
+	border-radius: 5px;
+	width: 300px;
+	padding: 30px 20px 20px 30px;
+	margin: 30px auto;
+  }
+  
+  .registration{
+	  margin-bottom:5px; 
+	  font-size: 1.2rem;
+	  color: black;
+  }
+   #register-container input[type="text"]{
+	margin-bottom: 10px;}
+  
+  #register {
+	padding: 10px 30px;
+	border-radius: 20px;
+	font-size: 1.2rem;
+	color: white;
+	margin-top: 15px;
+	background-color: blue;
+  }
+  
+  #remail,#rpword, #fname, #lname{
+	width: calc(100% - 14px); 
+	padding: 10px; /* Add padding to inputs */
+	box-sizing: border-box; /* Include padding and border in input width */
+	border: 2px solid black;
+  }
+  
+  form #newClassificationForm label {
+	color: black;
+  }
+  
+  #management-links{
+	  display: block;
+	  padding-left: 30px;
+	  padding-bottom: 10px;
+  }
+  #management-links a {
+	font-size: 1.3rem;
+  }
+  
+  #newClassifactorForm{
+	  display: inline-block; 
+	  border: 1px solid gray;
+	  padding: 10px;
+	  background-color: #5a8bb3;
+	  margin: 0 30%;
+	  width: 30%;
+  }
+  #newClassifactorForm label {
+	font-size:small;
+	color: black;
+	font-style: italic;
+  }
+  #newClassifactorForm input {
+	display: block; /* Places the input and button on separate lines */
+	width: 60%;
+	box-sizing: border-box; 
+	margin-top: 10px; 
+  margin-bottom: 20px;
+  }
+  #newClassifactorForm button {
+  padding: 5px;
+  font-weight:bold;
+  }
+  
+  #newClassificatorForm label{
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .new-vehicle-form label, select{
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	margin: auto;
+  }
+  .newClassificatorForm input{
+	height: 30px;
+	border-radius: 8px;
+	font-size: larger;
+  }
+  
+  #newClassificatorForm button,  .new-vehicle-form button{
+	width: 250px;
+	margin: auto;
+	height: 44px;
+	border-radius: 8px;
+  }
+  
+  .new-vehicle-form{
+	display: inline-block; 
+	border: 1px solid gray;
+	padding: 10px;
+	background-color: #5a8bb3;
+	margin: 0 40%;
+	width: 40%;
+	height: fit-content;
+  }
   .new-vehicle-form select {
-  width: 40%;}
+	margin-left: 0;
+  }
+  .new-vehicle-form button {
+	margin-top: 20px;
+	width: 60%;}
   
+	.new-vehicle-form textarea {
+	  padding: 30px;
+	  width: 70%;
+	}
+  
+	.new-vehicle-form label {
+	  margin-left: 0;
+	  padding-top: 5px;
+	}
 
-}
+	#classificationList{
+		width: 50%;
+		margin-left: 0;
+		padding: 10px;
+	}
+	
+	#updateForm {
+		display: inline-block; 
+	border: 1px solid gray;
+	padding: 10px;
+	background-color: #5a8bb3;
+	margin: 0 30%;
+	width: 40%;
+	height: fit-content;
+	}
+	#updateForm select {
+		margin-left: 0;
+	  }
+	  #updateForm button {
+		margin-top: 20px;
+		width: 60%;}
+	  
+		#updateForm textarea {
+		  padding: 30px;
+		  width: 70%;
+		}
+	  
+		#updateForm label {
+		  margin-left: 0;
+		  padding-top: 5px;
+		}
 
+	#updForm label {
+		color: black;
+		font-size:medium;
+	}
+		
+  @media only screen and (min-width: 728px){
+	
+  
+	#wrapper {
+	  border-radius: 10px;
+	  /* margin-top: 2rem; */
+	  padding: 1vw;
+	  width: 75vw;
+	  max-width: 1200px;
+	}
+	
+	body{
+	  background-image: url(../images/site/small_check.jpg);
+	  
+	}
+	#wrapper{
+	  background-color: white;
+	  width: 75%;
+	  margin: auto;
+	  /* padding: 10px; */
+	  border: 2px solid blue;
+	  border-radius: 4%;
+	}
+	main h1{
+	  grid-column: 1/3;
+	}
+  
+	#first-part img {
+	  width: 100%;
+	}
+  
+	  
+	#first-part div {
+	  position: absolute;
+	  left: 150px;
+	  top:100px;
+	  font-size: 20px;
+	}
+	
+	#first-part div a img{
+	  width: fit-content;
+	}
+  
+	#second-part {
+	  display: grid;
+	  grid-template-columns: 1fr 1fr; 
+	  gap: 20px;
+	  padding-left: 20px;
+	  padding-right: 20px;
+	}
+	
+	#del-upg {
+	  grid-column-start: 1;
+	  grid-row-start: 1;
+	  grid-row-end:2;
+	}
+	
+	/* Positions the Reviews section in the second column */
+	#rev {
+	  grid-column-start: 2;
+	}
+	
+	#rev ul li {
+	  margin-bottom: 20px; /* Adjust the margin as needed */
+	}
+  
+	#pageView{
+	  display: flex;
+	  /* grid-template-columns: 1fr 1fr; */
+	}
+  #PagePictureDetail h3{
+	text-decoration: underline ;
+	margin-top: 0; 
+	font-size: 2rem;
+  }
+  #PagePictureDetail h3::after{
+	content: " ✔️";
+	font-size: 3rem;
+  }
+  #PagePicture{
+	width: 500px;
+	height: 250px;
+  }
+  
+  #login-container, #register-container {
+	width: 400px;
+	 
+  }
+  
+  .new-vehicle-form{
+	display: inline-block; 
+	border: 1px solid gray;
+	padding: 10px;
+	background-color: #5a8bb3;
+  }
+  .new-vehicle-form button {
+	margin-top: 5px;
+	width: 60%;}
+	.new-vehicle-form select {
+	width: 40%;}
 
-
-
+	#classificationList{
+		width: 35%;
+		margin-left: 0;
+		padding: 10px;
+	}
+	/* .classification-update-list{
+		width: 35%;
+	} */
+	#updateForm {
+		display: inline-block; 
+	border: 1px solid gray;
+	padding: 10px;
+	background-color: #5a8bb3;
+	}
+	#updateForm button {
+		margin: 0 50px;
+		padding: 10px;
+		width: 60%;}
+		
+	#updateForm select {
+		width: 40%;}
+  
+  }
