@@ -20,4 +20,6 @@
 <% if (locals.accountData.account_type === 'Employee' || locals.accountData.account_type === 'Admin') { %>
     <h3>Inventory Management</h3>
     <p><a href="/inv">Manage Inventory</a></p>
+<% } else if (locals.accountData.account_type === "Client") {%>
+    <%- myReview %>
 <% } %>

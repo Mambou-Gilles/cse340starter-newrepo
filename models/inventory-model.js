@@ -154,5 +154,29 @@ async function deleteInventoryItem(inv_id) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventory, addClassification, checkExistingClassification, addVehicleInventory, updateInventory, deleteInventoryItem};
+/* ***************************
+ *  Add Review Inventory Item
+ * ************************** */
+async function addAReview(review_description, date, inv_id, account_id){
+  try{
+    const sql = `INSERT INTO review (review_text, review_date, inv_id, account_id) VALUES( $1, $2, $3, $4) RETURNING*`;
+    const data = await pool.query(sql, [review_description, date, inv_id, account_id]);
+    return data;
+  }catch (error) {
+    new Error("Add review to the inventory error");
+  }
+}
+
+async function getReviews(vehicle_id){
+  try{
+    const sql = `SELECT account_firstname, review_date, review_text FROM public.review AS rview JOIN public.account AS acc 
+    ON rview.account_id = acc.account_id WHERE rview.inv_id = $1;`;
+    const data = await pool.query(sql, [vehicle_id]);
+    return data.rows;
+  }catch{
+    new Error ("get review failed.");
+  }
+}
+
+module.exports = {getClassifications, getInventoryByClassificationId, getInventory, addClassification, checkExistingClassification, addVehicleInventory, updateInventory, deleteInventoryItem, addAReview, getReviews};
 

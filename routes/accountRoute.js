@@ -54,6 +54,17 @@ router.post("/update", utilities.handleErrors(accountController.updateAccount))
 router.get("/logout", accountController.logout)
 
 
+router.get("/review/edit/:inv_id", utilities.handleErrors(accountController.editReview));
+router.get("/review/delete/:inv_id", utilities.handleErrors(accountController.deleteReview));
+router.post(
+  "/review/edit",
+  regValidate.reviewRules(), 
+  regValidate.checkReviewData,
+  utilities.handleErrors(accountController.updatedReview))
+
+router.post(
+  "/review/delete", 
+  utilities.handleErrors(accountController.deletedReview))
 
 
 

@@ -48,13 +48,13 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 app.use(cookieParser())
 app.use(utilities.checkJWTToken)
 
-app.use("/inv", (req,res,next) => {
-  if(res.locals.accountData && (res.locals.accountData.account_type === "Employee" || res.locals.account_type === "Admin")) {
-    next();
-  } else {
-    res.redirect("account/login")
-  }
-})
+// app.use("/inv", (req,res,next) => {
+//   if(res.locals.accountData && (res.locals.accountData.account_type === "Employee" || res.locals.account_type === "Admin")) {
+//     next();
+//   } else {
+//     res.redirect("account/login")
+//   }
+// })
 
 
 //Express Messages Middleware

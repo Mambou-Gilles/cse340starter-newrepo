@@ -1,0 +1,29 @@
+<% if (title){ %> <!-- Checking if the 'title' variable is defined -->
+    <h1><%= title %></h1> <!-- Displaying the title if it exists -->
+<% }else{
+    res.redirect("/") <!-- Redirecting to the root URL if the 'title' variable is not defined -->
+} %>
+
+<%- messages() %> <!-- Displaying flash messages -->
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+        <%  }) %>
+    </ul>
+<% } %>
+
+<form action="/account/review/edit"  method="post" id="vehicleupdateForm">
+    <label>Review Date:</label>
+    <input type="text" name="review_date" value="<%- date %>" readonly required>
+    <label>Review Text:</label>
+    <textarea type="text" name="review_text" required><%- reviewText %></textarea>
+    
+    <input type="hidden" name="inv_id" value="<%- inv_id %>">
+
+    <input type="hidden" name="review_id" value="<%- review_id %>">
+
+    <input type="hidden" name="account_id" value="<%- locals.accountData.account_id %>"><br><br>
+
+    <button type="submit">Update Review</button>
+</form>

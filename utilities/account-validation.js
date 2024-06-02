@@ -119,6 +119,39 @@ validate.checkLogData = async (req, res, next) => {
       }
       next()
   }
+
+  validate.reviewRules = () => {
+    return [
+        body("review_text")
+        .trim()
+        .escape()
+        .notEmpty()
+        .isLength({ min: 1 })
+        .withMessage("Please enter a review text"),
+    ]
+}
+validate.checkReviewData = async (req, res, next) => {
+    const {review_text, review_date, review_id, inv_id} = req.body;
+    const account_id = res.locals.accountData.account_id;
+    const getReview = await accountModel.getReview(account_id,inv_id);
+    const vehicleName = `${getReview[0].inv_year} ${getReview[0].inv_make} ${getReview[0].inv_model}`;
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()){
+        let nav = await utilities.getNav()
+        res.render(`account/update-review`, {
+            errors,
+            title: "Edit " + vehicleName,
+            nav,
+            reviewText: review_text,
+            date : review_date,
+            inv_id,
+            review_id,
+        })
+        return
+    }
+    next()
+}
   
   
   module.exports = validate

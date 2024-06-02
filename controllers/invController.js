@@ -1,5 +1,6 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
+const { inventoryRules } = require("../utilities/management-account-validation"); 
 
 
 const invCont = {}
@@ -23,16 +24,30 @@ invCont.buildByClassificationId = async function (req, res, next) {
 /* ******************************
  *  Function to build single Inventory Page View
  * ************************** */
-invCont.BuildVehiclePageViewId = async function(req, res, next) {    
+invCont.BuildVehiclePageViewId = async function(req, res, next) {  
+  let reviewMessage;  
   const vehicle_id = req.params.vehicleViewId;
   const data = await invModel.getInventory(vehicle_id);
+
+  if (!data || data.length === 0) {
+    // Handle case where inventory data is not found
+    return res.status(404).send('Vehicle not found');
+  }
+
   const vehicleView = await utilities.BuildPageView(data);
+  const getReviews = await invModel.getReviews(vehicle_id);
+
+  // Ensure getReviews returns an array or initialize it to an empty array
+  reviewMessage = await utilities.reviewInventoryView(getReviews || []);
+  
   let nav = await utilities.getNav();
   const className = `${data[0].inv_year} ${data[0].inv_make} ${data[0].inv_model} `;
   res.render("./inventory/vehicleView", {
       title: className, 
       nav, 
       vehicleView, 
+      inv_id: vehicle_id,
+      reviewMessage,
   });
 };
 
@@ -304,7 +319,24 @@ invCont.deleteInventory = async function (req, res, next) {
   } else {
       const itemName = `${inv_make} ${inv_model}`;
       req.flash("notice", "Sorry, the delete failed.");
-      res.redirect("inventory/delete/inv_id");
+      res.redirect("/inv/delete/inv_id");
+  }
+}
+
+invCont.addAReview = async function (req, res,next){
+  const { review_description,inv_id, account_id} = req.body;
+  const date = new Date();
+  const reviewData = await invModel.addAReview(review_description, 
+                                              date, 
+                                              parseInt(inv_id), 
+                                              parseInt(account_id)
+                                              );
+  if (reviewData){
+      req.flash("notice", "Review Added");
+      res.redirect(`/inv/detail/${inv_id}`);
+  }else{
+      req.flash("notice", "Adding review failed");
+      res.redirect(`/inv/detail/${inv_id}`);
   }
 }
 

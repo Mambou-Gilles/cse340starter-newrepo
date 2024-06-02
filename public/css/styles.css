@@ -328,7 +328,22 @@
 		color: black;
 		font-size:medium;
 	}
+
+	#vehicleReviewForm {
+		border: 1px solid black;
+		padding: 20px;
+	}
+	#vehicleReviewForm label, #vehicleupdateForm label, #vehicledeleteForm label {
+		color: black;
+	}
+	#vehicleReviewForm textarea, #vehicleupdateForm textarea, #vehicledeleteForm textarea {
+		height: 50px;
+		width: 35%;
+	}
 		
+	#no-reviews-message{
+		background-color: #fbff00;
+	}
   @media only screen and (min-width: 728px){
 	
   

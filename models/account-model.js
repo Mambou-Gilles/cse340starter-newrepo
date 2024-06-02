@@ -120,5 +120,46 @@ async function updatePassword(
   }
 }
 
+async function getInventoryByReview(account_id){
+  try{
+    const sql = `SELECT iv.inv_id, review_id, inv_year, inv_make, inv_model, review_date FROM public.review AS rv JOIN public.inventory AS iv
+    ON rv.inv_id = iv.inv_id WHERE rv.account_id = $1`;
+    const data = await pool.query(sql, [account_id]);
+    return data.rows;
+  }catch(error){
+      return error.message;
+  }
+}
 
-  module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, checkExistingPassword, updatePassword };
+async function getReview(account_id, inv_id){
+  try{
+    const sql = `SELECT review_id, account_id, review_date, review_text, inv_year, inv_make, inv_model
+                  FROM public.review AS rv JOIN public.inventory AS iv
+                  ON rv.inv_id = iv.inv_id WHERE account_id = $1 AND iv.inv_id = $2`
+    const data = await pool.query(sql, [account_id, inv_id]);
+    return data.rows;
+  }catch(error){
+    new Error(`getReview model ${error}`);
+  }
+}
+ 
+async function updateReview(review_text, review_date, review_id){
+  try {
+      const sql = `UPDATE public.review SET review_text = $1, review_date = $2 WHERE review_id = $3 RETURNING *`
+      const data = await pool.query(sql, [review_text, review_date, review_id]);
+      return data.rows[0];
+  } catch (error) {
+    new Error(`error in the query UpdateReview ${error}`)
+  }
+}
+async function deleteReview(review_id){
+  try {
+      const sql = `DELETE FROM public.review WHERE review_id = $1 RETURNING *`
+      const data = await pool.query(sql, [review_id]);
+      return data.rows[0];
+  } catch (error) {
+    new Error(`error in the query UpdateReview ${error}`)
+  }
+}
+
+  module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, checkExistingPassword, updatePassword, getInventoryByReview, getReview, updateReview, deleteReview   };

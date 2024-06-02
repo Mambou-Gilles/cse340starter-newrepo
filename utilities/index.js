@@ -183,5 +183,66 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
+ /* ****************************************
+*  Check Login and Role
+* ************************************ */
+Util.checkEmpAdminPermissions = (req, res, next) => {
+  // Check if the user is logged in
+  if (!res.locals.loggedin) {
+    req.flash("notice", " Please log in first");
+    return res.redirect("/account/login");
+  }
+ 
+  // Check if the user has the role of "Employee" or "Admin"
+  if (res.locals.accountData.account_type === "Employee" || res.locals.accountData.account_type === "Admin") {
+    console.log("Permissions OK account type:", res.locals.accountData.account_type)
+    // User has the required role, allow them to proceed
+    next();
+  } else {
+    // User does not have the required role, redirect them with a flash message
+    console.log("No permissions account type:", res.locals.accountData.account_type)
+    req.flash("notice", "You do not have permission to access this page.");
+    return res.redirect("/account/login"); // Redirect to a suitable page
+  }
+};
+
+Util.reviewInventoryView = async function(review) {
+  let reviewList;
+  reviewList = "<ul>"
+
+  // Ensure 'review' is an array and iterate over it
+  if (Array.isArray(review) && review.length > 0) {
+    review.forEach(element => {
+        reviewList += `<li><p><strong>${element.account_firstname}</strong> wrote on the ${element.review_date}<p>
+            <hr>
+            <p>${element.review_text}</p>
+        </li>`;
+    });
+  } else {
+    // Handle case where there are no reviews
+    reviewList +='<p id="no-reviews-message">No reviews available. Be the first to write a review.</p>';
+  }
+  
+  reviewList += "</ul>";
+  return reviewList;
+}
+
+Util.manageReviews = (data) =>{
+  let dataTable = "<table><thead>";
+  dataTable += "<tr><th>My reviews</th><td>&nbsp;</td><td>&nbsp;</td></tr>"; // Table header row
+  dataTable += "</thead>";
+  // Set up the table body
+  dataTable += "<tbody>";
+  // Iterate over all vehicles in the array and put each in a row
+  data.forEach(function (element) { // Loop through each vehicle data
+      // Populate table rows with vehicle information and action links
+      dataTable += `<tr><td>Reviewed the ${element.inv_year} ${element.inv_make} ${element.inv_model} on ${element.review_date}</td>`; // Vehicle make and model
+      dataTable += `<td><a href='/account/review/edit/${element.inv_id}' title='Click to update'>Modify</a></td>`; // Link to edit the vehicle
+      dataTable += `<td><a href='/account/review/delete/${element.inv_id}' title='Click to delete'>Delete</a></td></tr>`; // Link to delete the vehicle
+  });
+  dataTable += "</tbody></table>";
+  return dataTable;
+}
+
 
 module.exports = Util

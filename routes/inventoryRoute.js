@@ -8,7 +8,8 @@ const classificationValidator = require("../utilities/management-account-validat
 router.get("/type/:classificationId", invController.buildByClassificationId);
 
 // Route to build the inventory Single View page of the vehicle.
-router.get("/detail/:vehicleViewId", invController.BuildVehiclePageViewId);
+router.get("/detail/:vehicleViewId", 
+         invController.BuildVehiclePageViewId);
 
 // Route to Handle Error.
 router.get("/err", invController.errorHandling);
@@ -41,5 +42,10 @@ router.get("/delete/:inv_id",
             // classificationValidator.inventoryRules(), 
             // classificationValidator.checkUpdateData,
             utilities.handleErrors(invController.deleteInventoryView));
+
+//route to add review to the inventory
+router.post("/add-review",
+    utilities.handleErrors(invController.addAReview)
+)
 
 module.exports = router;
